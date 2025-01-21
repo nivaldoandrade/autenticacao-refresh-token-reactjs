@@ -10,7 +10,7 @@ interface IFormData {
 }
 
 export function SignIn() {
-  const { signIn } = useAuth();
+  const { signedIn, signIn } = useAuth();
 
   const form = useForm<IFormData>({
     defaultValues: {
@@ -26,6 +26,8 @@ export function SignIn() {
       console.log('error');
     }
   });
+
+  console.log(signedIn);
 
   return (
     <div className="min-h-screen flex flex-col justify-center mx-auto max-w-[480px] p-6">
