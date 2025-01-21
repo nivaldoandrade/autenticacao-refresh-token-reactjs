@@ -1,7 +1,10 @@
+import { AuthProvider } from './contexts/AuthContext';
 import { SignIn } from './pages/SignIn';
 
 export default function App() {
   return (
-    <SignIn />
+    <AuthProvider>
+      <SignIn />
+    </AuthProvider>
   );
 }

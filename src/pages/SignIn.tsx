@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useAuth } from '@/hooks/useAuth';
 import { useForm } from 'react-hook-form';
 
 interface IFormData {
@@ -9,6 +10,7 @@ interface IFormData {
 }
 
 export function SignIn() {
+  const { signIn } = useAuth();
 
   const form = useForm<IFormData>({
     defaultValues: {
@@ -19,7 +21,7 @@ export function SignIn() {
 
   const handleSubmit = form.handleSubmit(async ({ email, password }) => {
     try {
-      console.log({ email, password });
+      signIn(email, password);
     } catch {
       console.log('error');
     }
