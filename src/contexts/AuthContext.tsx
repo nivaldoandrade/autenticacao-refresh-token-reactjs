@@ -5,6 +5,7 @@ import { createContext, useCallback, useMemo, useState } from 'react';
 interface IAuthContextValue {
   signedIn: boolean;
   signIn(email: string, password: string): Promise<void>;
+  signOut: VoidFunction;
 }
 
 export const AuthContext = createContext({} as IAuthContextValue);
@@ -27,9 +28,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setSignedIn(true);
   }, []);
 
+  const signOut = useCallback(() => {
+    localStorage.removeItem(storageKeys.ACCESS_TOKEN);
+    localStorage.removeItem(storageKeys.REFRESH_TOKEN);
+
+    setSignedIn(false);
+  }, []);
+
   const value = useMemo(() => ({
-    signedIn: signedIn, signIn
-  }), [signIn, signedIn]);
+    signedIn: signedIn,
+    signIn,
+    signOut
+  }), [signIn, signedIn, signOut]);
 
   return (
     <AuthContext.Provider value={value}>
