@@ -1,6 +1,7 @@
 import { IUser } from '@/entities/IUser';
 import { UsersService } from '@/services/UsersService';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 export function Home() {
   const [users, setUsers] = useState<IUser[]>([]);
@@ -8,8 +9,8 @@ export function Home() {
   useEffect(() => {
     UsersService.getUsers()
       .then(setUsers)
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        toast('Erro ao carregar os usuários!');
       });
   }, []);
 
