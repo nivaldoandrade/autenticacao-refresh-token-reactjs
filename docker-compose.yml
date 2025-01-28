@@ -1,0 +1,21 @@
+name: project-refresh-token
+
+services:
+  app:
+    build:
+      context: .
+      args:
+        - VITE_API_URL=http://localhost:8080
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  backend:
+    image: nivaldoandrade/oauth2-resource-server:amd64
+    environment:
+      - EXPIRES_IN_ACCESS_TOKEN=10 #10 seconds
+      - EXPIRES_IN_REFRESH_TOKEN=604800 #7days in seconds
+    ports:
+      - "8080:8080"
+
