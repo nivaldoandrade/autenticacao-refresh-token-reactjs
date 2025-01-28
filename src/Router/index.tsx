@@ -1,6 +1,6 @@
 import { Home } from '@/pages/Home';
 import { SignIn } from '@/pages/SignIn';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { AuthGuard } from './AuthGuard';
 
 export function Router() {
@@ -14,6 +14,8 @@ export function Router() {
       <Route element={<AuthGuard isPrivate={false} />}>
         <Route path='/sign-in' element={<SignIn />} />
       </Route>
+
+      <Route path='*' element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
