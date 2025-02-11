@@ -99,7 +99,7 @@ Ou, caso prefira outro backend, ele precisa expor os seguintes endpoints:
     - Corpo da requisição:
     ``` JSON
       {
-        "accessToken": "string"
+        "refreshToken": "string"
       }
     ```
     - Resposta:
